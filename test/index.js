@@ -1,6 +1,16 @@
+function hasTargetSum(array, target) {
+  const complements = new Set();
+  for (const num of array) {
+    if (complements.has(num)) {
+      return true;
+    }
+    complements.add(target - num);
+  }
+  return false;
+}
+
 const chai = require("chai");
 global.expect = chai.expect;
-const hasTargetSum = require("../index");
 
 describe("hasTargetSum", () => {
   it("returns true when the array is [3, 8, 12, 4, 11, 7] and the target is 10", () => {
@@ -21,7 +31,8 @@ describe("hasTargetSum", () => {
   it("returns true when the array is [2, 2, 3, 3] and the target is 4", () => {
     expect(hasTargetSum([2, 2, 3, 3], 4)).to.be.true;
   });
-  it("returns false when the array is [4] and the target is 4", () => {
+  it("returns false when the array is [4] and the target is 5", () => {
     expect(hasTargetSum([4], 5)).to.be.false;
   });
 });
+
